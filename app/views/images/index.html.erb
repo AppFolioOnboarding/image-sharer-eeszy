@@ -1,0 +1,14 @@
+<html>
+<body style="background-color:powderblue;">
+
+<h1><i>Welcome to Image Sharer</i></h1>
+</body>
+
+<%= link_to 'Add images', new_image_path %>
+
+<% @images.each do |image| %>
+    <div>
+      <%= image_tag image.link, size: '400'%>
+    </div>
+<% end %>
+</html>
