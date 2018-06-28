@@ -4,11 +4,12 @@
 <h1><i>Welcome to Image Sharer</i></h1>
 </body>
 
-<%= link_to 'Add images', new_image_path %>
+<h3><%= link_to 'Add images', new_image_path %></h3>
 
-<% @images.each do |image| %>
+<% @images.reverse.each do |image| %>
     <div>
-      <%= image_tag image.link, size: '400'%>
+      <%= image_tag image.link, size: '300'%><br>
+      <%= link_to'Show', image_path(image.id)%>
     </div>
 <% end %>
 </html>
