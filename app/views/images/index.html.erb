@@ -12,9 +12,9 @@
 
 <div class="row" style="text-align:center">
 <% @images.reverse.each do |image| %>
-      <div class="column" style="text-align:center">
+      <div class="column" align = "center">
         <%= image_tag image.link, width: 300, height: 300%><br>
-        <%= link_to'Show', image_path(image.id)%>
+        <i><%= link_to'Show', image_path(image.id)%></i>
       </div>
 <% end %>
 </div>
