@@ -19,8 +19,9 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should post create with link errors are displayed' do
-    post images_url params: { images: { link: 'http://www.gstatic.com/tv/thumb/persons/80696/80696_v9_bb.jpg' } }
-
+    assert_difference 'Image.count' do
+      post images_url params: { images: { link: 'http://www.gstatic.com/tv/thumb/persons/80696/80696_v9_bb.jpg' } }
+    end
     assert_response :redirect
   end
 end
