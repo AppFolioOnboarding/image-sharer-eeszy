@@ -1,14 +1,22 @@
 <html>
-<body style="background-color:powderblue;">
+<head>
+<%= stylesheet_link_tag "application" %>
+</head>
+<body>
+<div class="jumbotron">
+  <h2 class="display-3"><b>Welcome To Image Sharer</b></h2>
+  <p class="lead">This is a simple website for adding images and sharing them! have fun!</p>
 
-<h1><i>Welcome to Image Sharer</i></h1>
-</body>
+  <h3><%= link_to 'Add Images', new_image_path, class:"btn btn-primary btn-lg"%></h3>
+</div>
 
-<%= link_to 'Add images', new_image_path %>
-
-<% @images.each do |image| %>
-    <div>
-      <%= image_tag image.link, size: '400'%>
-    </div>
+<div class="row">
+<% @images.order(created_at: :desc).each do |image| %>
+      <div class="column" align = "center">
+        <%= image_tag image.link, width: 300, height: 300%><br>
+        <i><%= link_to'Show', image_path(image.id)%></i>
+      </div>
 <% end %>
+</div>
+</body>
 </html>
