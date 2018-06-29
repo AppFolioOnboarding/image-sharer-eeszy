@@ -1,6 +1,11 @@
 class ImagesController < ApplicationController
   def index
-    @images = Image.all
+    tag = params[:tag_name]
+    @images = if tag.nil?
+                Image.all
+              else
+                Image.tagged_with(tag)
+              end
   end
 
   def new
@@ -21,7 +26,9 @@ class ImagesController < ApplicationController
     @image = Image.find(params[:id])
   end
 
-  private def image_params
-    params.require(:images).permit(:link)
+  private
+
+  def image_params
+    params.require(:images).permit(:link, :tag_list)
   end
 end

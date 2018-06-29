@@ -6,14 +6,18 @@
 <div class="jumbotron">
   <h2 class="display-3"><b>Welcome to image Sharer</b></h2>
   <p class="lead">This is a simple website for adding images and sharing them! have fun!</p>
-
+  <h3><%= link_to 'Home', images_path, class:"btn btn-primary btn-lg"%></h3>
   <h3><%= link_to 'Add images', new_image_path, class:"btn btn-primary btn-lg"%></h3>
+
 </div>
 
 <div class="row" style="text-align:center">
 <% @images.reverse.each do |image| %>
       <div class="column" align = "center">
         <%= image_tag image.link, width: 300, height: 300%><br>
+        <% image.tag_list.each do |tag| %>
+            <%= link_to tag, images_path(tag_name: tag), class: 'btn btn-xs btn-info' %>
+        <% end %><br>
         <i><%= link_to'Show', image_path(image.id)%></i>
       </div>
 <% end %>
