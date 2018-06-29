@@ -6,10 +6,27 @@ else
 end
 ActsAsTaggableOnMigration.class_eval do
   def self.up
+    create_tags_table
+    create_taggings_table
+
+    add_index :taggings, :tag_id
+    add_index :taggings, %i[taggable_id taggable_type context]
+  end
+
+  def self.down
+    drop_table :taggings
+    drop_table :tags
+  end
+
+  private
+
+  def create_tags_table
     create_table :tags do |t|
       t.string :name
     end
+  end
 
+  def create_taggings_table
     create_table :taggings do |t|
       t.references :tag
 
@@ -24,13 +41,5 @@ ActsAsTaggableOnMigration.class_eval do
 
       t.datetime :created_at
     end
-
-    add_index :taggings, :tag_id
-    add_index :taggings, %i[taggable_id taggable_type context]
-  end
-
-  def self.down
-    drop_table :taggings
-    drop_table :tags
   end
 end
